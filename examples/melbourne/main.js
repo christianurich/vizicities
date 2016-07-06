@@ -39,13 +39,17 @@ VIZI.imageTileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}
     } else {
       height = 10 + Math.random() * 10;
     }
-
+    feature.properties["active"] = true;
     for (i in feature.geometry.coordinates) {
       for (j in feature.geometry.coordinates[i]){
-        coords = feature.geometry.coordinates[i]
-        // console.log([feature.geometry.coordinates[i][j][0], feature.geometry.coordinates[i][j][1]])
-
         feature.geometry.coordinates[i][j] = meters2degress(feature.geometry.coordinates[i][j][0], feature.geometry.coordinates[i][j][1]);
+        if (isNaN(feature.geometry.coordinates[i][j][0]) || isNaN(feature.geometry.coordinates[i][j][1])) {
+          feature.geometry = [];
+
+          return;
+
+        }
+
       }
     }
 
@@ -66,7 +70,6 @@ VIZI.imageTileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}
       lineOpacity: 0.2
     };
   },
-
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://whosonfirst.mapzen.com#License">Who\'s On First</a>.'
 }).addTo(world);
 

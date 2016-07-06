@@ -13327,7 +13327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var urlParams = {
 	        x: this._tile[0],
-	        y: Math.pow(2, this._tile[2]) - this._tile[1],
+	        y: Math.pow(2, this._tile[2]) - this._tile[1] -1,
 	        z: this._tile[2]
 	      };
 
